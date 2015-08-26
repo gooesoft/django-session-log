@@ -1,6 +1,7 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 import logging
 from collections import namedtuple
@@ -10,9 +11,9 @@ from django.contrib.auth import SESSION_KEY
 from django.utils import timezone
 from django.utils.importlib import import_module
 
+from .conf import SESSION_IP_KEY, SESSION_LAST_USED_KEY, SESSION_USER_AGENT_KEY
 from .models import SessionActivity, create_session_activity
 from .utils import deserialize_date, serialize_date
-from .conf import SESSION_IP_KEY, SESSION_LAST_USED_KEY, SESSION_USER_AGENT_KEY
 
 logger = logging.getLogger("app.session_activity")
 

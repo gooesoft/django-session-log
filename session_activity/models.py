@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
@@ -11,9 +11,9 @@ from .conf import settings
 
 
 class SessionActivity(models.Model):
-    user            = models.ForeignKey(settings.AUTH_USER_MODEL)
-    session_key     = models.CharField(_("session key"), max_length=40)
-    created_at      = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    session_key = models.CharField(_("session key"), max_length=40)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = _("Session activity")
