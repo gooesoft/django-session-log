@@ -1,10 +1,11 @@
 #-*- coding: utf-8 -*-
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
+from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.signals import user_logged_in, user_logged_out
 
 from .conf import settings
 
@@ -24,7 +25,7 @@ def create_session_activity(request, user, **kwargs):
     Start session activity tracking for newly logged-in user.
     """
     session_key = request.session.session_key
-    if user.is_authenticated():
+    if user.is_authenticated() and session_key:
         SessionActivity.objects.get_or_create(user=user, session_key=session_key)
 
 
@@ -35,7 +36,7 @@ def destroy_session_activity(request, user, **kwargs):
     Should be called when user logs out or when a session is deactivated.
     """
     session_key = request.session.session_key
-    if user.is_authenticated():
+    if user.is_authenticated() and session_key:
         SessionActivity.objects.filter(user=user, session_key=session_key)
 
 
