@@ -37,7 +37,7 @@ def destroy_session_activity(request, user, **kwargs):
     """
     session_key = request.session.session_key
     if user.is_authenticated() and session_key:
-        SessionActivity.objects.filter(user=user, session_key=session_key)
+        SessionActivity.objects.filter(user=user, session_key=session_key).delete()
 
 
 user_logged_in.connect(create_session_activity)
