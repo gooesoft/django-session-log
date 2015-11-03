@@ -36,8 +36,8 @@ def destroy_session_activity(request, user, **kwargs):
     Should be called when user logs out or when a session is deactivated.
     """
     session_key = request.session.session_key
-    if user.is_authenticated() and session_key:
-        SessionActivity.objects.filter(user=user, session_key=session_key).delete()
+    if session_key:
+        SessionActivity.objects.filter(session_key=session_key).delete()
 
 
 user_logged_in.connect(create_session_activity)
