@@ -9,7 +9,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-version = "1.0"
+version = "1.2"
 
 if sys.argv[-1] == "publish":
     os.system("python setup.py sdist upload")
@@ -18,8 +18,6 @@ if sys.argv[-1] == "publish":
     print("  git push --tags")
     sys.exit()
 
-readme = open("README.md").read()
-history = open("HISTORY.rst").read().replace(".. :changelog:", "")
 
 setup(
     name="django-session-log",
@@ -29,7 +27,6 @@ setup(
     author="Visgean Skeloru",
     author_email="visgean@gmail.com",
     url="https://github.com/Visgean/django-session-log",
-    long_description=readme + "\n\n" + history,
     packages=[
         "session_log",
     ],

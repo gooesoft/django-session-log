@@ -5,7 +5,6 @@ from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from session_log.conf import SESSION_IP_KEY, SESSION_USER_AGENT_KEY
 from .conf import settings
 
 
@@ -33,8 +32,8 @@ def create_session_activity(request, user, **kwargs):
         SessionActivity.objects.get_or_create(
             user=user,
             session_key=session.session_key,
-            ip_address=session.get(SESSION_IP_KEY),
-            user_agent=session.get(SESSION_USER_AGENT_KEY),
+            ip_address=request.META.get("REMOTE_ADDR", None),
+            user_agent=request.META.get("HTTP_USER_AGENT", ""),
         )
 
 
