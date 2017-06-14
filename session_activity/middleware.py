@@ -11,6 +11,8 @@ class SessionActivityMiddleware(object):
     def __call__(self, request):
         # Code to be executed for each request before
         # the view (and later middleware) are called.
+        update_current_session_info(request)
+
         response = self.get_response(request)
 
         # Code to be executed for each request/response after
