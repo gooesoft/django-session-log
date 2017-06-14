@@ -22,7 +22,7 @@ readme = open("README.md").read()
 history = open("HISTORY.rst").read().replace(".. :changelog:", "")
 
 setup(
-    name="django-session-activity",
+    name="django-session-log",
     version=version,
     description="Logs django sessions. ",
     license="MIT",

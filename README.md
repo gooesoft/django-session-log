@@ -43,7 +43,7 @@ and log out them.
     your look and feel expectations.
 
 ## Dependencies
-`django-session-activity` depends on `django>=1.11.2`,
+`django-session-log` depends on `django>=1.11.2`,
 `django-appconf>=0.6` and `python-dateutil`.
 
 ## Demo
@@ -56,15 +56,13 @@ repository:
     ./manage.py runserver
     
 
-License
-=======
+## License
 
 django-session-log is released under the MIT license.
 
-Other Resources
-===============
+## Other Resources
 
--   GitHub repository -
+-   Original GitHub repository -
     <https://github.com/nigma/django-session-activity>
--   PyPi Package site -
+-   Original PyPi Package site -
     <http://pypi.python.org/pypi/django-session-activity>
