@@ -15,12 +15,12 @@ from .conf import SESSION_IP_KEY, SESSION_LAST_USED_KEY, SESSION_USER_AGENT_KEY
 from .models import SessionActivity, create_session_activity
 from .utils import deserialize_date, serialize_date
 
-logger = logging.getLogger("app.session_activity")
+logger = logging.getLogger("app.session_log")
 
 SessionInfo = namedtuple("SessionInfo", [
     "session", "session_key", "is_current",
     "ip", "last_used", "user_agent",
-    "session_activity"
+    "session_log"
 ])
 
 

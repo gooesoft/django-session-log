@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from session_activity import urls as session_urls
+from session_log import urls as session_urls
 from simple_login import views
 
 urlpatterns = [

@@ -5,7 +5,7 @@ from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from session_activity.conf import SESSION_IP_KEY, SESSION_USER_AGENT_KEY
+from session_log.conf import SESSION_IP_KEY, SESSION_USER_AGENT_KEY
 from .conf import settings
 
 

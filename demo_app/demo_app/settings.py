@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    "session_activity",
+    "session_log",
     'simple_login'
 
 ]
@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'session_activity.middleware.SessionActivityMiddleware',
+    'session_log.middleware.SessionActivityMiddleware',
 ]
 
 ROOT_URLCONF = 'demo_app.urls'

@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('session_activity', '0002_sessionactivity_time_logout'),
+        ('session_log', '0002_sessionactivity_time_logout'),
     ]
 
     operations = [

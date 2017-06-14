@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('session_activity', '0001_initial'),
+        ('session_log', '0001_initial'),
     ]
 
     operations = [

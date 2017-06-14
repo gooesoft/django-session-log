@@ -9,7 +9,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-version = "0.2.0.dev6"
+version = "1.0"
 
 if sys.argv[-1] == "publish":
     os.system("python setup.py sdist upload")
@@ -24,23 +24,22 @@ history = open("HISTORY.rst").read().replace(".. :changelog:", "")
 setup(
     name="django-session-activity",
     version=version,
-    description="""List all active sessions and sign-out from all sessions opened on other computers""",
+    description="Logs django sessions. ",
     license="MIT",
-    author="Filip Wasilewski",
-    author_email="en@ig.ma",
-    url="https://github.com/nigma/django-session-activity",
+    author="Visgean Skeloru",
+    author_email="visgean@gmail.com",
+    url="https://github.com/Visgean/django-session-log",
     long_description=readme + "\n\n" + history,
     packages=[
-        "session_activity",
+        "session_log",
     ],
     include_package_data=True,
     install_requires=[
-        "django>=1.5.0",
+        "django>=1.1.0",
         "django-appconf>=0.6",
         "python-dateutil"
     ],
     zip_safe=False,
-    keywords="django-session-activity",
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Web Environment",

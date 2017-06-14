@@ -15,14 +15,22 @@ Overview
 Quickstart
 ==========
 
-1.  Include `django-session-activity` in your `requirements.txt` file.
-2.  Add `session_activity` to `INSTALLED_APPS` and migrate/syncdb.
-3.  Add `session_activity.middleware.SessionActivityMiddleware` to
+Basic Installation that will provide you with admin view of all session logs:
+
+1.  Include `django-session-log` in your `requirements.txt` file.
+2.  Add `session_log` to `INSTALLED_APPS` and migrate db.
+
+
+Optionally you can add view that lets your users see all of their active sessions
+and log out them. 
+
+1.  Add `session_activity.middleware.SessionActivityMiddleware` to
     `MIDDLEWARE_CLASSES` after the
     `django.contrib.sessions.middleware.SessionMiddleware` and
     `django.contrib.auth.middleware.AuthenticationMiddleware` middleware
-    classes.
-4.  Add url config for session list and sign-out views:
+    classes. This step is optional and only required if you intend user to be
+    able to see all his active sessions and log out them
+2.  Add url config for session list and sign-out views:
 
     > ``` {.sourceCode .python}
     > url(r'^sessions/', include('session_activity.urls')),
@@ -31,17 +39,16 @@ Quickstart
     Then link to the main view using `{% url "session_activity_list" %}`
     template tag.
 
-5.  Optionally copy & modify the `session_list.html` template to match
+3.  Optionally copy & modify the `session_list.html` template to match
     your look and feel expectations.
 
-Dependencies
-============
+## Dependencies
 
-`django-session-activity` depends on `django>=1.5.0`,
+`django-session-activity` depends on `django>=1.11.2`,
 `django-appconf>=0.6` and `python-dateutil`.
 
-Documentation
-=============
+## Demo
+
 
 There’s also an instant demo example that can be run from the cloned
 repository:
