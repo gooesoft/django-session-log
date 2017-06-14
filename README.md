@@ -1,6 +1,5 @@
 # django-session-log
 
-[![Latest Version]]
 
 Logs all sessions and sign-outs. Originally developed at [en.ig.ma
 software shop].
@@ -8,19 +7,10 @@ software shop].
 Overview
 ========
 
-This app records and shows last session activity and allows users to
-sign-out from all active sessions, even remote ones.
+- logging all sessions permanently
+- logging off remote sessions
+- logging of IP addresses and browser info
 
-In other words, it handles the following use case:
-
-> You come back home and realize that you forgot to log out on your
-> work/university/other remote computer. What now?
->
-> You take a look at the recent active sessions for your account and
-> click a single button to deactivate all sessions opened on other
-> computers.
-
-![image]
 
 Quickstart
 ==========
@@ -53,18 +43,17 @@ Dependencies
 Documentation
 =============
 
-The full documentation is at <http://django-session-activity.rtfd.org>
-(TODO).
-
 There’s also an instant demo example that can be run from the cloned
 repository:
 
-    python demo.py
+    ./manage.py migrate
+    ./manage.py runserver
+    
 
 License
 =======
 
-django-session-activity is released under the MIT license.
+django-session-log is released under the MIT license.
 
 Other Resources
 ===============
@@ -73,8 +62,3 @@ Other Resources
     <https://github.com/nigma/django-session-activity>
 -   PyPi Package site -
     <http://pypi.python.org/pypi/django-session-activity>
-
-  [Latest Version]: https://pypip.in/v/django-session-activity/badge.png
-  [![Latest Version]]: https://pypi.python.org/pypi/django-session-activity/
-  [en.ig.ma software shop]: http://en.ig.ma
-  [image]: http://i.imgur.com/7LOMmJL.png
