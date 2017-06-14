@@ -1,8 +1,6 @@
-1# -*- coding: utf-8 -*-
+from __future__ import absolute_import
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
+import datetime
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -14,6 +12,8 @@ class SessionActivity(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     session_key = models.CharField(_("session key"), max_length=40)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    time_logout = models.DateTimeField(null=True)
 
     class Meta:
         verbose_name = _("Session activity")
@@ -29,16 +29,17 @@ def create_session_activity(request, user, **kwargs):
         SessionActivity.objects.get_or_create(user=user, session_key=session_key)
 
 
-def destroy_session_activity(request, user, **kwargs):
+def end_session_activity(request, user, **kwargs):
     """
-    Destroy session activity record.
-
+    Marks end of the session activity.
     Should be called when user logs out or when a session is deactivated.
     """
     session_key = request.session.session_key
     if session_key:
-        SessionActivity.objects.filter(session_key=session_key).delete()
+        SessionActivity.objects.filter(session_key=session_key).update(
+            time_logout=datetime.datetime.now()
+        )
 
 
 user_logged_in.connect(create_session_activity)
-user_logged_out.connect(destroy_session_activity)
+user_logged_out.connect(end_session_activity)

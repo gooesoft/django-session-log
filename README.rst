@@ -1,26 +1,14 @@
-=======================
-django-session-activity
-=======================
+# django-session-log
+
 
 .. image:: https://pypip.in/v/django-session-activity/badge.png
     :target: https://pypi.python.org/pypi/django-session-activity/
     :alt: Latest Version
 
-.. image:: https://pypip.in/d/django-session-activity/badge.png
-    :target: https://pypi.python.org/pypi/django-session-activity/
-    :alt: Downloads
 
-.. image:: https://pypip.in/license/django-session-activity/badge.png
-    :target: https://pypi.python.org/pypi/django-session-activity/
-    :alt: License
+Logs all sessions and sign-outs.
+Originally developed at `en.ig.ma software shop <http://en.ig.ma>`_.
 
-.. image:: http://b.repl.ca/v1/created_by-nigma-72a4b1.png
-    :target: http://en.ig.ma/
-    :alt: Built by
-
-List all active sessions and sign-out from all sessions opened on other computers.
-
-Developed at `en.ig.ma software shop <http://en.ig.ma>`_.
 
 Overview
 --------

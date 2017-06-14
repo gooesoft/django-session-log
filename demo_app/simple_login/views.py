@@ -11,5 +11,8 @@ class SimpleLogin(LoginView):
     def __init__(self):
         if not User.objects.filter(username="admin").exists():
             User.objects.create_superuser("admin", "admin@test.com", "pass")
-        
+
+        if not User.objects.filter(username="user").exists():
+            User.objects.create_user("user", "user@test.com", "pass")
+
         super(SimpleLogin, self).__init__()
