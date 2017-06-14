@@ -5,6 +5,7 @@ from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from session_activity.conf import SESSION_IP_KEY, SESSION_USER_AGENT_KEY
 from .conf import settings
 
 
@@ -12,8 +13,10 @@ class SessionActivity(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     session_key = models.CharField(_("session key"), max_length=40)
     created_at = models.DateTimeField(auto_now_add=True)
-
     time_logout = models.DateTimeField(null=True)
+
+    ip_address = models.GenericIPAddressField(null=True)
+    user_agent = models.TextField(null=True)
 
     class Meta:
         verbose_name = _("Session activity")
@@ -24,9 +27,15 @@ def create_session_activity(request, user, **kwargs):
     """
     Start session activity tracking for newly logged-in user.
     """
-    session_key = request.session.session_key
-    if user.is_authenticated() and session_key:
-        SessionActivity.objects.get_or_create(user=user, session_key=session_key)
+    session = request.session
+
+    if user.is_authenticated() and session.session_key:
+        SessionActivity.objects.get_or_create(
+            user=user,
+            session_key=session.session_key,
+            ip_address=session.get(SESSION_IP_KEY),
+            user_agent=session.get(SESSION_USER_AGENT_KEY),
+        )
 
 
 def end_session_activity(request, user, **kwargs):

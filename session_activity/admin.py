@@ -9,7 +9,10 @@ from .models import SessionActivity
 
 
 class SessionActivityAdmin(admin.ModelAdmin):
-    list_display = ("user", "session_key", "created_at")
+    list_display = (
+        "user", "ip_address", "user_agent", "created_at",
+        "time_logout"
+    )
     list_select_related = True
 
 admin.site.register(SessionActivity, SessionActivityAdmin)
