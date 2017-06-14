@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import
 
 import logging
 from collections import namedtuple
@@ -11,7 +10,7 @@ from django.contrib.auth import SESSION_KEY
 from django.utils import timezone
 from importlib import import_module
 
-from .conf import SESSION_IP_KEY, SESSION_LAST_USED_KEY, SESSION_USER_AGENT_KEY
+from . import conf
 from .models import SessionActivity, create_session_activity
 from .utils import deserialize_date, serialize_date
 
@@ -20,7 +19,7 @@ logger = logging.getLogger("app.session_log")
 SessionInfo = namedtuple("SessionInfo", [
     "session", "session_key", "is_current",
     "ip", "last_used", "user_agent",
-    "session_log"
+    "session_activity"
 ])
 
 
@@ -67,9 +66,11 @@ def get_active_sessions(user, request=None):
                 session=session,
                 session_key=session.session_key,
                 is_current=is_current_session(session, request),
-                ip=session.get(SESSION_IP_KEY, None),
-                last_used=deserialize_date(session.get(SESSION_LAST_USED_KEY, None)),
-                user_agent=session.get(SESSION_USER_AGENT_KEY, ""),
+                ip=session.get(conf.SESSION_IP_KEY, None),
+                last_used=deserialize_date(
+                    session.get(conf.SESSION_LAST_USED_KEY, None)
+                ),
+                user_agent=session.get(conf.SESSION_USER_AGENT_KEY, ""),
                 session_activity=obj
             )
             active_sessions.append(session_info)
@@ -87,15 +88,19 @@ def update_current_session_info(request):
 
     session = request.session
     now = timezone.now()
-    last_used = deserialize_date(session.get(SESSION_LAST_USED_KEY, None))
+    last_used = deserialize_date(
+        session.get(conf.SESSION_LAST_USED_KEY, None)
+    )
 
     # TODO: limit to authenticated users only?
-    if not last_used or (now - last_used) > settings.SESSION_ACTIVITY_UPDATE_THROTTLE:
+    if not last_used or (now - last_used) > conf.SESSION_ACTIVITY_UPDATE_THROTTLE:
         logger.debug("Refreshing session activity")
 
-        session[SESSION_LAST_USED_KEY] = serialize_date(now)
-        session[SESSION_IP_KEY] = request.META["REMOTE_ADDR"]
-        session[SESSION_USER_AGENT_KEY] = request.META.get("HTTP_USER_AGENT", "")
+        session[conf.SESSION_LAST_USED_KEY] = serialize_date(now)
+        session[conf.SESSION_IP_KEY] = request.META["REMOTE_ADDR"]
+        session[conf.SESSION_USER_AGENT_KEY] = request.META.get(
+            "HTTP_USER_AGENT", ""
+        )
 
         user = request.user
         if user.is_authenticated():

@@ -43,7 +43,6 @@ and log out them.
     your look and feel expectations.
 
 ## Dependencies
-
 `django-session-activity` depends on `django>=1.11.2`,
 `django-appconf>=0.6` and `python-dateutil`.
 
