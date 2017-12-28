@@ -4,14 +4,14 @@ import datetime
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
 from .conf import settings
-
+from django.utils import timezone
 
 class SessionActivity(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     session_key = models.CharField(_("session key"), max_length=40)
     created_at = models.DateTimeField(auto_now_add=True)
+    last_activity = models.DateTimeField(null=True)
     time_logout = models.DateTimeField(null=True)
 
     ip_address = models.GenericIPAddressField(null=True)
@@ -32,6 +32,7 @@ def create_session_activity(request, user, **kwargs):
         SessionActivity.objects.get_or_create(
             user=user,
             session_key=session.session_key,
+            last_activity=timezone.now(),
             ip_address=request.META.get("REMOTE_ADDR", None),
             user_agent=request.META.get("HTTP_USER_AGENT", ""),
         )
@@ -45,7 +46,7 @@ def end_session_activity(request, user, **kwargs):
     session_key = request.session.session_key
     if session_key:
         SessionActivity.objects.filter(session_key=session_key).update(
-            time_logout=datetime.datetime.now()
+            time_logout=timezone.now()
         )
 
 
